@@ -1,8 +1,8 @@
 # server.R
 source("helpers.R")
 
-Ns_small <- as.matrix(1:10000)
-Ns_big <- as.matrix(c(seq(1, 9999, 1), seq(1000, 100000000, 1000)))
+Ns_small <- 1:10000
+Ns_big <- c(seq(1, 9999, 1), seq(1000, 100000000, 1000))
 server <- function(input, output) {
     
   betas_fun <- reactive({
@@ -14,10 +14,8 @@ server <- function(input, output) {
                     "Alpha = 0.01" = 0.01, 
                     "Alpha = 0.05" = 0.05, 
                     "Alpha = 0.10" = 0.10)
-    betas_small <- apply(X = Ns_small, MARGIN = 1, FUN = power_calculator, mu_t = (60 + tau),
-                         mu_c = 60, sigma = sigma, alpha = alpha)
-    betas_big <- apply(X = Ns_big,MARGIN = 1, FUN = power_calculator, mu_t = (60 + tau), mu_c = 60,
-                       sigma = sigma, alpha = alpha)
+    betas_small <- power_calculator(mu_t = 60 + tau, mu_c = 60, sigma = sigma, alpha = alpha, N = Ns_small)
+    betas_big <- power_calculator(mu_t = 60 + tau, mu_c = 60, sigma = sigma, alpha = alpha, N = Ns_big)
     big <- (sum(betas_small >= target, na.rm = TRUE) == 0 | maxn > 10000)
     return(list(betas_small = betas_small, betas_big = betas_big, big = big))
   })
@@ -31,8 +29,8 @@ server <- function(input, output) {
                     "Alpha = 0.01" = 0.01, 
                     "Alpha = 0.05" = 0.05, 
                     "Alpha = 0.10" = 0.10)
-    betas_small <- apply(X = Ns_small, MARGIN = 1, FUN = power_calculator_binary, p1 = p1, p0 = p0, alpha = alpha)
-    betas_big <- apply(X = Ns_big,MARGIN = 1, FUN = power_calculator_binary, p1 = p1, p0 = p0, alpha = alpha)
+    betas_small <- power_calculator_binary(p1 = p1, p0 = p0, alpha = alpha, N = Ns_small)
+    betas_big <- power_calculator_binary(p1 = p1, p0 = p0, alpha = alpha, N = Ns_big)
     big <- (sum(betas_small >= target, na.rm = TRUE) == 0 | maxn > 10000)
     return(list(betas_small = betas_small, betas_big = betas_big, big = big))
   })
@@ -48,12 +46,10 @@ server <- function(input, output) {
                     "Alpha = 0.01" = 0.01, 
                     "Alpha = 0.05" = 0.05, 
                     "Alpha = 0.10" = 0.10)
-    betas_small <- apply(X = Ns_small, MARGIN = 1, FUN = power_calculator_cluster,
-                         mu_t = (60 + tau), mu_c = 60, sigma = sigma, ICC = ICC,
-                         n_clus_per_arm = n_clus_per_arm, alpha = alpha)
-    betas_big <- apply(X = Ns_big, MARGIN = 1, FUN = power_calculator_cluster,
-                       mu_t = (60 + tau), mu_c = 60, sigma = sigma, ICC = ICC, 
-                       n_clus_per_arm = n_clus_per_arm, alpha = alpha)
+    betas_small <- power_calculator_cluster(mu_t = (60 + tau), mu_c = 60, sigma = sigma, ICC = ICC,
+                                            n_clus_per_arm = n_clus_per_arm, alpha = alpha, N = Ns_small)
+    betas_big <- power_calculator_cluster(mu_t = (60 + tau), mu_c = 60, sigma = sigma, ICC = ICC,
+                                          n_clus_per_arm = n_clus_per_arm, alpha = alpha, N = Ns_big)
     big <- (sum(betas_small >= target, na.rm = TRUE) == 0 | maxn > 10000)
     return(list(betas_small = betas_small, betas_big = betas_big, big = big))
   })
@@ -69,10 +65,10 @@ server <- function(input, output) {
                     "Alpha = 0.01" = 0.01, 
                     "Alpha = 0.05" = 0.05, 
                     "Alpha = 0.10" = 0.10)
-    betas_small <- apply(X = Ns_small, MARGIN = 1, FUN = power_calculator_binary_cluster,
-                         p0 = p0, p1 = p1, ICC = ICC, n_clus_per_arm = n_clus_per_arm, alpha = alpha)
-    betas_big <- apply(X = Ns_big, MARGIN = 1, FUN = power_calculator_binary_cluster, p0 = p0, p1 = p1,
-                       ICC = ICC, n_clus_per_arm = n_clus_per_arm, alpha = alpha)
+    betas_small <- power_calculator_binary_cluster(p0 = p0, p1 = p1, ICC = ICC, n_clus_per_arm = n_clus_per_arm,
+                                                   alpha = alpha, N = Ns_small)
+    betas_big <- power_calculator_binary_cluster(p0 = p0, p1 = p1, ICC = ICC, n_clus_per_arm = n_clus_per_arm,
+                                                   alpha = alpha, N = Ns_big)
     big <- (sum(betas_small >= target, na.rm = TRUE) == 0 | maxn > 10000)
     return(list(betas_small = betas_small, betas_big = betas_big, big = big))
   })
@@ -148,15 +144,7 @@ server <- function(input, output) {
         lines(Ns_small, results$betas_small, lwd = 4, col = "green")
         lines(
           Ns_small,
-          apply(
-            X = Ns_small,
-            MARGIN = 1,
-            FUN = power_calculator,
-            mu_t = (60 + tau),
-            mu_c = 60,
-            sigma = sigma,
-            alpha = alpha
-          ),
+          power_calculator(mu_t = (60 + tau), mu_c = 60, sigma = sigma, alpha = alpha, N = Ns_small),
           lwd = 4,
           col = "blue"
         )
@@ -189,15 +177,7 @@ server <- function(input, output) {
         lines(Ns_big, results$betas_big, lwd = 4, col = "green")
         lines(
           Ns_big,
-          apply(
-            X = Ns_big,
-            MARGIN = 1,
-            FUN = power_calculator,
-            mu_t = (60 + tau),
-            mu_c = 60,
-            sigma = sigma,
-            alpha = alpha
-          ),
+          power_calculator(mu_t = (60 + tau), mu_c = 60, sigma = sigma, alpha = alpha, N = Ns_big),
           lwd = 4,
           col = "blue"
         )
@@ -289,14 +269,7 @@ server <- function(input, output) {
         lines(Ns_small, results$betas_small, lwd = 4, col = "green")
         lines(
           Ns_small,
-          apply(
-            X = Ns_small,
-            MARGIN = 1,
-            FUN = power_calculator_binary,
-            p1 = p1,
-            p0 = p0,
-            alpha = alpha
-          ),
+          power_calculator_binary(p1 = p1, p0 = p0, alpha = alpha, N = Ns_small),
           lwd = 4,
           col = "blue"
         )
@@ -327,14 +300,7 @@ server <- function(input, output) {
         lines(Ns_big, results$betas_big, lwd = 4, col = "green")
         lines(
           Ns_big,
-          apply(
-            X = Ns_big,
-            MARGIN = 1,
-            FUN = power_calculator_binary,
-            p1 = p1,
-            p0 = p0,
-            alpha = alpha
-          ),
+          power_calculator_binary(p1 = p1, p0 = p0, alpha = alpha, N = Ns_big),
           lwd = 4,
           col = "blue"
         )
