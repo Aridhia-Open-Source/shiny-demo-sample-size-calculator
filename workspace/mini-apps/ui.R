@@ -1,4 +1,6 @@
 
+library(shiny)
+
 shinyUI(fluidPage(
   headerPanel("Power Calculator"),
   fluidRow(
