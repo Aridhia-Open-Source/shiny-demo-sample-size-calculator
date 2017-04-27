@@ -10,10 +10,7 @@ server <- function(input, output) {
     tau <- input$tau
     target <- input$target
     maxn <- input$maxn
-    alpha <- switch(input$alpha,
-                    "Alpha = 0.01" = 0.01, 
-                    "Alpha = 0.05" = 0.05, 
-                    "Alpha = 0.10" = 0.10)
+    alpha <- as.numeric(input$alpha)
     betas_small <- power_calculator(mu_t = 60 + tau, mu_c = 60, sigma = sigma, alpha = alpha, N = Ns_small)
     betas_big <- power_calculator(mu_t = 60 + tau, mu_c = 60, sigma = sigma, alpha = alpha, N = Ns_big)
     big <- (sum(betas_small >= target, na.rm = TRUE) == 0 | maxn > 10000)
@@ -25,10 +22,7 @@ server <- function(input, output) {
     p1 <- input$p1_b
     target <- input$target_b
     maxn <- input$maxn_b
-    alpha <- switch(input$alpha_b,
-                    "Alpha = 0.01" = 0.01, 
-                    "Alpha = 0.05" = 0.05, 
-                    "Alpha = 0.10" = 0.10)
+    alpha <- as.numeric(input$alpha_b)
     betas_small <- power_calculator_binary(p1 = p1, p0 = p0, alpha = alpha, N = Ns_small)
     betas_big <- power_calculator_binary(p1 = p1, p0 = p0, alpha = alpha, N = Ns_big)
     big <- (sum(betas_small >= target, na.rm = TRUE) == 0 | maxn > 10000)
@@ -42,10 +36,7 @@ server <- function(input, output) {
     n_clus_per_arm <- input$n_clus_per_arm_c
     target <- input$target_c
     maxn <- input$maxn_c
-    alpha <- switch(input$alpha_c,
-                    "Alpha = 0.01" = 0.01, 
-                    "Alpha = 0.05" = 0.05, 
-                    "Alpha = 0.10" = 0.10)
+    alpha <- as.numeric(input$alpha_c)
     betas_small <- power_calculator_cluster(mu_t = (60 + tau), mu_c = 60, sigma = sigma, ICC = ICC,
                                             n_clus_per_arm = n_clus_per_arm, alpha = alpha, N = Ns_small)
     betas_big <- power_calculator_cluster(mu_t = (60 + tau), mu_c = 60, sigma = sigma, ICC = ICC,
@@ -61,10 +52,7 @@ server <- function(input, output) {
     n_clus_per_arm <- input$n_clus_per_arm_bc
     target <- input$target_bc
     maxn <- input$maxn_bc
-    alpha <- switch(input$alpha_bc,
-                    "Alpha = 0.01" = 0.01, 
-                    "Alpha = 0.05" = 0.05, 
-                    "Alpha = 0.10" = 0.10)
+    alpha <- as.numeric(input$alpha_bc)
     betas_small <- power_calculator_binary_cluster(p0 = p0, p1 = p1, ICC = ICC, n_clus_per_arm = n_clus_per_arm,
                                                    alpha = alpha, N = Ns_small)
     betas_big <- power_calculator_binary_cluster(p0 = p0, p1 = p1, ICC = ICC, n_clus_per_arm = n_clus_per_arm,
@@ -80,10 +68,7 @@ server <- function(input, output) {
       tau <- input$tau
       target <- input$target
       maxn <- input$maxn
-      alpha <- switch(input$alpha,
-                      "Alpha = 0.01" = 0.01, 
-                      "Alpha = 0.05" = 0.05, 
-                      "Alpha = 0.10" = 0.10)
+      alpha <- as.numeric(input$alpha)
       results <- betas_fun()
       if(!results$big){
         plot(NA, ylim = c(0, 1), xlim = c(0, maxn),
@@ -119,10 +104,7 @@ server <- function(input, output) {
       tau <- input$tau_c
       n_clus_per_arm <- input$n_clus_per_arm_c
       target <- input$target_c
-      alpha <- switch(input$alpha_c,
-                      "Alpha = 0.01" = 0.01, 
-                      "Alpha = 0.05" = 0.05, 
-                      "Alpha = 0.10" = 0.10)
+      alpha <- as.numeric(input$alpha_c)
       maxn <- input$maxn_c
       results <- betas_fun_clus()
       if(!results$big){
@@ -198,10 +180,7 @@ server <- function(input, output) {
       p1 <- input$p1_b
       target <- input$target_b
       maxn <- input$maxn_b
-      alpha <- switch(input$alpha_b,
-                      "Alpha = 0.01" = 0.01, 
-                      "Alpha = 0.05" = 0.05, 
-                      "Alpha = 0.10" = 0.10)
+      alpha <- as.numeric(input$alpha_b)
       results <- betas_fun_binary()
       if(!results$big){
         plot(
@@ -244,12 +223,7 @@ server <- function(input, output) {
       ICC <- input$ICC_bc
       n_clus_per_arm <- input$n_clus_per_arm_bc
       target <- input$target_bc
-      alpha <- switch(
-        input$alpha_bc,
-        "Alpha = 0.01" = 0.01,
-        "Alpha = 0.05" = 0.05,
-        "Alpha = 0.10" = 0.10
-      )
+      alpha <- as.numeric(input$alpha_bc)
       maxn <- input$maxn_bc
       results <- betas_fun_binary_clus()
       if(!results$big){
@@ -322,10 +296,7 @@ server <- function(input, output) {
       sigma <- input$sigma
       tau <- input$tau
       target <- input$target
-      alpha <- switch(input$alpha,
-                      "Alpha = 0.01" = 0.01, 
-                      "Alpha = 0.05" = 0.05, 
-                      "Alpha = 0.10" = 0.10)
+      alpha <- as.numeric(input$alpha)
       results <- betas_fun()
       if (!results$big) {
         nrequired <- Ns_small[which.max(results$betas_small >= target)]
@@ -357,12 +328,7 @@ server <- function(input, output) {
       tau <- input$tau_c
       n_clus_per_arm <- input$n_clus_per_arm_c
       target <- input$target_c
-      alpha <- switch(
-        input$alpha_c,
-        "Alpha = 0.01" = 0.01,
-        "Alpha = 0.05" = 0.05,
-        "Alpha = 0.10" = 0.10
-      )
+      alpha <- as.numeric(input$alpha_c)
       maxn <- input$maxn_c
       results <- betas_fun_clus()
       if (!results$big) {
@@ -400,12 +366,7 @@ server <- function(input, output) {
       p0 <- input$p0_b
       p1 <- input$p1_b
       target <- input$target_b
-      alpha <- switch(
-        input$alpha_b,
-        "Alpha = 0.01" = 0.01,
-        "Alpha = 0.05" = 0.05,
-        "Alpha = 0.10" = 0.10
-      )
+      alpha <- as.numeric(input$alpha_b)
       results <- betas_fun_binary()
       if (!results$big) {
         nrequired <- Ns_small[which.max(results$betas_small >= target)]
@@ -437,12 +398,7 @@ server <- function(input, output) {
       ICC <- input$ICC_bc
       n_clus_per_arm <- input$n_clus_per_arm_bc
       target <- input$target_bc
-      alpha <- switch(
-        input$alpha_bc,
-        "Alpha = 0.01" = 0.01,
-        "Alpha = 0.05" = 0.05,
-        "Alpha = 0.10" = 0.10
-      )
+      alpha <- as.numeric(input$alpha_bc)
       maxn <- input$maxn_bc
       results <- betas_fun_binary_clus()
       if (!results$big) {

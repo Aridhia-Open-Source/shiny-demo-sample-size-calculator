@@ -18,8 +18,9 @@ shinyUI(fluidPage(
            wellPanel(
              conditionalPanel(
                condition = "input.clustered == false & input.binary == false",
-               selectInput("alpha", "Significance Level", c("Alpha = 0.01", "Alpha = 0.05", "Alpha = 0.10"), 
-                           selected = "Alpha = 0.05"),
+               selectInput("alpha", "Significance Level",
+                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1), 
+                           selected = 0.05),
                numericInput("tau", "Treatment Effect Size", value = 5, min = 0, max = 40),
                numericInput("sigma", "Standard Deviation of Outcome Variable", value = 10, min = 0, max = 30),
                sliderInput("target", "Power Target", value = 0.8, min = 0, max = 1),
@@ -27,8 +28,9 @@ shinyUI(fluidPage(
              ),
              conditionalPanel(
                condition = "input.clustered == false & input.binary == true",
-               selectInput("alpha_b", "Significance Level", c("Alpha = 0.01", "Alpha = 0.05", "Alpha = 0.10"),
-                           selected="Alpha = 0.05"),
+               selectInput("alpha_b", "Significance Level",
+                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
+                           selected = 0.05),
                numericInput("p0_b", "Proportion (DV = 1) in Control Group", value = 0.5, min = 0, max = 1),
                numericInput("p1_b", "Proportion (DV = 1) in Treatment Group", value = 0.65, min = 0, max = 1),
                sliderInput("target_b", "Power Target", value = 0.8, min = 0, max = 1),
@@ -36,8 +38,9 @@ shinyUI(fluidPage(
              ),
              conditionalPanel(
                condition = "input.clustered == true & input.binary == false",
-               selectInput("alpha_c", "Significance Level", c("Alpha = 0.01", "Alpha = 0.05", "Alpha = 0.10"),
-                           selected="Alpha = 0.05"),
+               selectInput("alpha_c", "Significance Level",
+                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
+                           selected = 0.05),
                numericInput("tau_c", "Treatment Effect Size", value = 5, min = 0, max = 40),
                numericInput("sigma_c", "Standard Deviation of Outcome Variable", value = 10, min = 0, max = 30),
                sliderInput("ICC_c", "Intra-cluster Correlation", value = 0.5, min = 0, max = 1),
@@ -47,8 +50,9 @@ shinyUI(fluidPage(
              ),
              conditionalPanel(
                condition = "input.clustered == true & input.binary == true",
-               selectInput("alpha_bc", "Significance Level", c("Alpha = 0.01", "Alpha = 0.05", "Alpha = 0.10"),
-                           selected="Alpha = 0.05"),
+               selectInput("alpha_bc", "Significance Level",
+                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
+                           selected = 0.05),
                numericInput("p0_bc", "Proportion (DV = 1) in Control Group", value = 0.5, min = 0, max = 1),
                numericInput("p1_bc", "Proportion (DV = 1) in Treatment Group", value = 0.65, min = 0, max = 1),
                sliderInput("ICC_bc", "Intra-cluster Correlation", value = 0.5, min = 0, max = 1),
