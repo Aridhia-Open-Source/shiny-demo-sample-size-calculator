@@ -2,7 +2,7 @@
 source("helpers.R")
 
 Ns_small <- 1:10000
-Ns_big <- c(seq(1, 9999, 1), seq(1000, 100000000, 1000))
+Ns_big <- c(seq(1, 9999, 1), seq(10000, 100000000, 1000))
 server <- function(input, output) {
     
   betas_fun <- reactive({
