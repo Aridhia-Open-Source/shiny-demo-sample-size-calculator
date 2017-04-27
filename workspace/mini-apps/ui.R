@@ -1,6 +1,12 @@
 
 library(shiny)
 
+source("helpers.R")
+source("continuousPowerCalc.R")
+source("binaryPowerCalc.R")
+source("continuousClusPowerCalc.R")
+source("binaryClusPowerCalc.R")
+
 shinyUI(fluidPage(
   headerPanel("Power Calculator"),
   fluidRow(
@@ -11,64 +17,25 @@ shinyUI(fluidPage(
                       in which individuals are randomly assigned to treatment or control and a 
                       clustered design, in which groups of individuals are assigned to treatment
                       and control together."),
-             checkboxInput(inputId = "clustered",label = "Clustered Design?", value = FALSE),
-             checkboxInput(inputId = "binary",label = "Binary Dependent Variable?", value = FALSE)
-           )),
-    column(4,
-           wellPanel(
-             conditionalPanel(
-               condition = "input.clustered == false & input.binary == false",
-               selectInput("alpha", "Significance Level",
-                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1), 
-                           selected = 0.05),
-               numericInput("tau", "Treatment Effect Size", value = 5, min = 0, max = 40),
-               numericInput("sigma", "Standard Deviation of Outcome Variable", value = 10, min = 0, max = 30),
-               sliderInput("target", "Power Target", value = 0.8, min = 0, max = 1),
-               numericInput("maxn", "Maximum Number of Subjects", value = 2000, min = 0, max = 10000000)
-             ),
-             conditionalPanel(
-               condition = "input.clustered == false & input.binary == true",
-               selectInput("alpha_b", "Significance Level",
-                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
-                           selected = 0.05),
-               numericInput("p0_b", "Proportion (DV = 1) in Control Group", value = 0.5, min = 0, max = 1),
-               numericInput("p1_b", "Proportion (DV = 1) in Treatment Group", value = 0.65, min = 0, max = 1),
-               sliderInput("target_b", "Power Target", value = 0.8, min = 0, max = 1),
-               numericInput("maxn_b", "Maximum Number of Subjects", value = 2000, min = 0, max = 10000000)
-             ),
-             conditionalPanel(
-               condition = "input.clustered == true & input.binary == false",
-               selectInput("alpha_c", "Significance Level",
-                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
-                           selected = 0.05),
-               numericInput("tau_c", "Treatment Effect Size", value = 5, min = 0, max = 40),
-               numericInput("sigma_c", "Standard Deviation of Outcome Variable", value = 10, min = 0, max = 30),
-               sliderInput("ICC_c", "Intra-cluster Correlation", value = 0.5, min = 0, max = 1),
-               numericInput("n_clus_per_arm_c", "Number of Clusters per Arm", value = 40, min = 0, max = 200),
-               sliderInput("target_c", "Power Target", value = 0.8, min = 0, max = 1),
-               numericInput("maxn_c", "Maximum Number of Subjects", value = 2000, min = 0, max = 10000000)
-             ),
-             conditionalPanel(
-               condition = "input.clustered == true & input.binary == true",
-               selectInput("alpha_bc", "Significance Level",
-                           c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
-                           selected = 0.05),
-               numericInput("p0_bc", "Proportion (DV = 1) in Control Group", value = 0.5, min = 0, max = 1),
-               numericInput("p1_bc", "Proportion (DV = 1) in Treatment Group", value = 0.65, min = 0, max = 1),
-               sliderInput("ICC_bc", "Intra-cluster Correlation", value = 0.5, min = 0, max = 1),
-               numericInput("n_clus_per_arm_bc", "Number of Clusters per Arm", value = 40, min = 0, max = 200),
-               sliderInput("target_bc", "Power Target", value = .8, min = 0, max = 1),
-               numericInput("maxn_bc", "Maximum Number of Subjects", value = 2000, min = 0, max = 10000000)
-             )
-           )),
-    column(8,
-           wellPanel(
-             plotOutput("powerplot")
+             checkboxInput(inputId = "clustered", label = "Clustered Design?", value = FALSE),
+             checkboxInput(inputId = "binary", label = "Binary Dependent Variable?", value = FALSE)
            )
-    )),
-  column(12,
-         wellPanel(
-           htmlOutput("nrequired") 
-         ))
+    )
+  ),
+  conditionalPanel(
+    condition = "input.clustered == false & input.binary == false",
+    continuousPowerCalcUI("continuous")
+  ),
+  conditionalPanel(
+    condition = "input.clustered == false & input.binary == true",
+    binaryPowerCalcUI("binary")
+  ),
+  conditionalPanel(
+    condition = "input.clustered == true & input.binary == false",
+    continuousClusPowerCalcUI("clus_continuous")
+  ),
+  conditionalPanel(
+   condition = "input.clustered == true & input.binary == true",
+   binaryClusPowerCalcUI("clus_binary")
   )
-)
+))
