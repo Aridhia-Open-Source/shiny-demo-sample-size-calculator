@@ -24,7 +24,8 @@ power_calculator_binary <- function(p1, p0, alpha=0.05, N){
 
 power_calculator_cluster <- function(mu_t, mu_c, sigma, ICC, alpha=0.05, n_clus_per_arm, N){
   n_per_clus <- N/(n_clus_per_arm*2)
-  if(n_per_clus < 1){return(NA)}
+  #if(n_per_clus < 1){return(NA)}
+  n_per_clus[n_per_clus < 1] <- NA
   lowertail <- (abs(mu_t - mu_c) * sqrt((n_clus_per_arm - 1)*n_per_clus))/
     sqrt((2*(sigma^2) * (1 + (n_per_clus-1)*ICC)))
   uppertail <- -1*lowertail
@@ -35,7 +36,8 @@ power_calculator_cluster <- function(mu_t, mu_c, sigma, ICC, alpha=0.05, n_clus_
 
 power_calculator_binary_cluster <- function(p1, p0, ICC, alpha=0.05, n_clus_per_arm, N){
   n_per_clus <- N/(n_clus_per_arm*2)
-  if(n_per_clus < 1){return(NA)}
+  #if(n_per_clus < 1){return(NA)}
+  n_per_clus[n_per_clus < 1] <- NA
   lowertail <- (abs(p1 - p0) * sqrt((n_clus_per_arm - 1)*n_per_clus))/
     sqrt((p1*(1-p1) + p0*(1-p0)) * (1 + (n_per_clus-1)*ICC))
   uppertail <- -1*lowertail
