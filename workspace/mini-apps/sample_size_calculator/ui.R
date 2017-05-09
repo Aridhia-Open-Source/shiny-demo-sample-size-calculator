@@ -12,7 +12,7 @@ shinyUI(fluidPage(
   fluidRow(
     column(12,
            wellPanel(
-             helpText("This calculator can help you understand the power of yourexperimental
+             helpText("This calculator can help you understand the power of your experimental
                       design to detect treatment effects.You can choose between a standard design
                       in which individuals are randomly assigned to treatment or control and a 
                       clustered design, in which groups of individuals are assigned to treatment
