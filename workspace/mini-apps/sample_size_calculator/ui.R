@@ -13,10 +13,20 @@ shinyUI(fluidPage(
     column(12,
            wellPanel(
              helpText("This calculator can help you understand the power of your experimental
-                      design to detect treatment effects.You can choose between a standard design
-                      in which individuals are randomly assigned to treatment or control and a 
+                      design to detect treatment effects.",
+                      
+                      p("You can choose between a standard design in which individuals are randomly
+                      assigned to treatment or control, and a 
                       clustered design, in which groups of individuals are assigned to treatment
                       and control together."),
+                      
+                      p("In addition, a binary study design can be selected, with a binary outcome 
+                        assessed between a", strong("control"), "and", strong("treated"), "group."),
+                      br(),
+                      p(strong("This R Shiny app is provided unsupported and at user's risk. If you
+                               are planning to use this app to inform your study, please review the
+                               code and ensure you are comfortable with the calculations made."))
+                      ),
              checkboxInput(inputId = "clustered", label = "Clustered Design?", value = FALSE),
              checkboxInput(inputId = "binary", label = "Binary Dependent Variable?", value = FALSE)
            )
