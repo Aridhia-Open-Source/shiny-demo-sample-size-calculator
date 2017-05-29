@@ -29,7 +29,7 @@ shinyUI(fluidPage(
                         of the app."),
                       br(),
                       p("The video below gives an overview on how to use the app:"),
-                      HTML('<iframe width="500" height="300" src="//www.youtube.com/embed/5OiuFpYP6GE" frameborder="0" allowfullscreen></iframe>'),
+                      HTML('<iframe width="500" height="300" src="//www.youtube.com/embed/RWCoExyMIrI" frameborder="0" allowFullScreen="allowfullscreen"></iframe>'),
                       p(strong("This R Shiny app is provided unsupported and at user's risk. If you
                                are planning to use this app to inform your study, please review the
                                code and ensure you are comfortable with the calculations made.")),
