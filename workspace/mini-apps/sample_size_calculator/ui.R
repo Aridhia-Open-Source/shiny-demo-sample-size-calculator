@@ -11,10 +11,12 @@ shinyUI(fluidPage( theme = "xapstyles.css",
   headerPanel("Sample Size Calculator"),
   fluidRow(
     column(12,
-           wellPanel(
-             helpText("This calculator can help you understand the power of your experimental
+           tabsetPanel(
+             tabPanel("Information",
+                      h3("Calculating Required Study Sample Size"),
+                      p("This calculator can help you understand the power of your experimental
                       design to detect treatment effects. This will inform the sample size you
-                      require to ensure your study is sufficiently powered.",
+                      require to ensure your study is sufficiently powered."),
                       
                       p("You can choose between a standard design in which individuals are randomly
                       assigned to treatment or control, and a 
@@ -30,16 +32,21 @@ shinyUI(fluidPage( theme = "xapstyles.css",
                       br(),
                       p("The video below gives an overview on how to use the app:"),
                       HTML('<iframe width="100%" height="500" src="//www.youtube.com/embed/RWCoExyMIrI" frameborder="0" allowFullScreen=""></iframe>'),
+                      br(),
                       p(strong("This R Shiny app is provided unsupported and at user's risk. If you
                                are planning to use this app to inform your study, please review the
-                               code and ensure you are comfortable with the calculations made.")),
-                      br()
+                               code and ensure you are comfortable with the calculations made."))
+                     
                       ),
+             tabPanel("Application",
+                      h3("Study Type"),
+                      p(""),
              checkboxInput(inputId = "clustered", label = "Clustered Design?", value = FALSE),
-             checkboxInput(inputId = "binary", label = "Binary Dependent Variable?", value = FALSE)
-           )
-    )
-  ),
+             checkboxInput(inputId = "binary", label = "Binary Dependent Variable?", value = FALSE),
+             br(),
+           
+    
+  
   conditionalPanel(
     condition = "input.clustered == false & input.binary == false",
     continuousPowerCalcUI("continuous")
@@ -55,5 +62,7 @@ shinyUI(fluidPage( theme = "xapstyles.css",
   conditionalPanel(
    condition = "input.clustered == true & input.binary == true",
    binaryClusPowerCalcUI("clus_binary")
-  )
+  ))
+))
+)
 ))
