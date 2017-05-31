@@ -7,7 +7,7 @@ source("binaryPowerCalc.R")
 source("continuousClusPowerCalc.R")
 source("binaryClusPowerCalc.R")
 
-shinyUI(fluidPage(
+shinyUI(fluidPage( theme = "xapstyles.css",
   headerPanel("Sample Size Calculator"),
   fluidRow(
     column(12,
@@ -29,7 +29,7 @@ shinyUI(fluidPage(
                         of the app."),
                       br(),
                       p("The video below gives an overview on how to use the app:"),
-                      HTML('<iframe width="500" height="300" src="//www.youtube.com/embed/RWCoExyMIrI" frameborder="0" allowFullScreen="allowfullscreen"></iframe>'),
+                      HTML('<iframe width="100%" height="500" src="//www.youtube.com/embed/RWCoExyMIrI" frameborder="0" allowFullScreen=""></iframe>'),
                       p(strong("This R Shiny app is provided unsupported and at user's risk. If you
                                are planning to use this app to inform your study, please review the
                                code and ensure you are comfortable with the calculations made.")),
