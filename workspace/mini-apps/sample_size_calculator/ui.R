@@ -12,32 +12,7 @@ shinyUI(fluidPage( theme = "xapstyles.css",
   fluidRow(
     column(12,
            tabsetPanel(
-             tabPanel("Information",
-                      h3("Calculating Required Study Sample Size"),
-                      p("This calculator can help you understand the power of your experimental
-                      design to detect treatment effects. This will inform the sample size you
-                      require to ensure your study is sufficiently powered."),
-                      
-                      p("You can choose between a standard design in which individuals are randomly
-                      assigned to treatment or control, and a 
-                      clustered design, in which groups of individuals are assigned to treatment
-                      and control together."),
-                      
-                      p("In addition, a binary study design can be selected, with a binary outcome 
-                        assessed between a", strong("control"), "and", strong("treated"), "group."),
-                      p("Experiment with different values and how they affect the graphical output, to 
-                        get a feel for how required sample size changes with power, treatment effect and 
-                        standard deviation of the outcome. The required sample size is output at the bottom
-                        of the app."),
-                      br(),
-                      p("The video below gives an overview on how to use the app:"),
-                      HTML('<iframe width="100%" height="500" src="//www.youtube.com/embed/RWCoExyMIrI" frameborder="0" allowFullScreen=""></iframe>'),
-                      br(),
-                      p(strong("This R Shiny app is provided unsupported and at user's risk. If you
-                               are planning to use this app to inform your study, please review the
-                               code and ensure you are comfortable with the calculations made."))
-                     
-                      ),
+             
              tabPanel("Application",
                       h3("Study Type"),
                       p(""),
@@ -62,7 +37,37 @@ shinyUI(fluidPage( theme = "xapstyles.css",
   conditionalPanel(
    condition = "input.clustered == true & input.binary == true",
    binaryClusPowerCalcUI("clus_binary")
-  ))
+  )),
+  tabPanel("Help",
+           h3("Calculating Required Study Sample Size"),
+           p("This mini-app acts as a calculator, helping you understand the power of your
+             experimental design to detect treatment effects. This will inform the sample 
+             size you require to ensure your study is sufficiently powered."),
+           br(),
+           h4("App layout"),
+           p("The app contains two tabs; this Help tab gives you an overview 
+             of the app itself. The Application tab allows you to select and run the 
+             required study type."),
+           br(),
+           h4("To use the app"),
+           p("To experiment with how study type affects the required sample size, you can: "),
+           tags$ol(
+             tags$li("Choose a ", strong("standard design "), 
+                     "design in which individuals are randomly assigned to treatment or control."),
+             tags$li("Choose a ", strong("clustered design"), "in which groups of individuals are assigned to treatment and control together."),
+             tags$li("Opt for a ", strong("binary study design"), "with a binary outcome assessed between a control and treated group.")
+           ),
+           
+           p("Experiment with different values and how they affect the graphical output, to get a feel for how required sample size changes with 
+             power, treatment effect, and standard deviation of the outcome. The required sample size is displayed at the bottom of the app."),
+           
+           p("Watch the video below for an app walkthrough. "), 
+           HTML('<iframe width="100%" height="500" src="//www.youtube.com/embed/RWCoExyMIrI" frameborder="0" allowFullScreen=""></iframe>'),
+           br(),
+           p(strong("NB: This mini-app is for provided for demonstration purposes, is unsupported and is utilised at user's risk. If you plan to
+                    use this mini-app to inform your study, please review the code and ensure you are comfortable with the calculations made before proceeding. "))
+           
+           )
 ))
 )
 ))
