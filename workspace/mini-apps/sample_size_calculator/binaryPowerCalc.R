@@ -21,7 +21,7 @@ binaryPowerCalcUI <- function(id) {
     ),
     column(12,
            wellPanel(
-             htmlOutput(ns("nrequired"))
+             tags$h3(htmlOutput(ns("nrequired")))
            )
     )
   )

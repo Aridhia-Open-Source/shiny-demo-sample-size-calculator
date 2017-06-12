@@ -21,7 +21,7 @@ continuousPowerCalcUI <- function(id) {
     ),
     column(12,
            wellPanel(
-             htmlOutput(ns("nrequired"))
+             tags$h3(htmlOutput(ns("nrequired")))
            )
     )
   )
@@ -107,7 +107,7 @@ continuousPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
         )
     }
     
-    HTML(str1)
+   HTML(str1)
   })
 }
 
