@@ -1,4 +1,7 @@
 @import '/assets/application-8b0cd7e75bb6e10c50ad7d51865ee367.css';
+.tab-content{
+  margin: 25px 0 0 0;
+}
 body
 {position:relative;}
 .well 
