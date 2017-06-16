@@ -1,4 +1,3 @@
-
 binaryPowerCalcUI <- function(id) {
   ns <- NS(id)
   
@@ -98,18 +97,18 @@ binaryPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
     
     str1 <-
       paste0(
-        "In order to achieve ",
+        "In order to achieve <strong>",
         target * 100,
-        "% power, you'll need to use a sample size of at least ",
+        "</strong>% power, you'll need to use a sample size of at least <strong>",
         nrequired,
-        "."
+        "</strong>."
       )
     if (sum(results$betas_big >= target, na.rm = TRUE) == 0) {
       str1 <-
         paste0(
-          "In order to achieve ",
+          "In order to achieve <strong>",
           target * 100,
-          "% power, you'll need to use a sample size of well more than 10,000,000"
+          "% power</strong>, you'll need to use a sample size of more than <strong>10,000,000</strong>"
         )
     }
     

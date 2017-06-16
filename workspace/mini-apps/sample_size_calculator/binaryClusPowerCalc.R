@@ -1,4 +1,3 @@
-
 binaryClusPowerCalcUI <- function(id) {
   ns <- NS(id)
   
@@ -42,7 +41,7 @@ binaryClusPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
     betas_small <- power_calculator_binary_cluster(p0 = p0, p1 = p1, ICC = ICC, n_clus_per_arm = n_clus_per_arm,
                                                    alpha = alpha, N = Ns_small)
     betas_big <- power_calculator_binary_cluster(p0 = p0, p1 = p1, ICC = ICC, n_clus_per_arm = n_clus_per_arm,
-                                                   alpha = alpha, N = Ns_big)
+                                                 alpha = alpha, N = Ns_big)
     big <- (sum(betas_small >= target, na.rm = TRUE) == 0 | maxn > 10000)
     return(list(betas_small = betas_small, betas_big = betas_big, big = big))
   })
@@ -86,7 +85,7 @@ binaryClusPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
         lty = c(1, 1)
       )
     }
-
+    
     if(results$big){
       plot(
         NA,
@@ -134,28 +133,28 @@ binaryClusPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
     if (results$big) {
       nrequired <- Ns_big[which.max(results$betas_big >= target)]
     }
-
+    
     str1 <-
       paste0(
-        "In order to achieve ",
+        "In order to achieve <strong>",
         target * 100,
-        "% power, you'll need to use a sample size of at least ",
+        "% power</strong>, you'll need to use a sample size of at least <strong>",
         nrequired,
-        ", or an average of at least ",
+        "</strong>, or an average of at least <strong>",
         round(nrequired / (n_clus_per_arm * 2)),
-        " subjects in each of ",
+        "</strong> subjects in each of <strong>",
         n_clus_per_arm * 2,
-        " clusters. Right-click to download image."
+        "</strong> clusters. Right-click to download image."
       )
     if (sum(results$betas_big >= target, na.rm = TRUE) == 0) {
       str1 <-
         paste0(
-          "In order to achieve ",
+          "In order to achieve <strong>",
           target * 100,
-          "% power, you'll need to use a sample size of well more than 10,000,000. You may need to increase the number of clusters."
+          "% power</strong>, you'll need to use a sample size of more than <strong>10,000,000</strong>. You may need to increase the number of clusters."
         )
     }
-
+    
     HTML(str1)
   })
 }
