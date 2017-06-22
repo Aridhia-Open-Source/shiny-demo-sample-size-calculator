@@ -4,21 +4,19 @@ binaryPowerCalcUI <- function(id) {
   fluidRow(
     column(4,
            wellPanel(
-             selectInput(ns("alpha_b"), "Significance Level",
+             selectInput(ns("alpha_b"), "Significance level",
                          c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
                          selected = 0.05),
-             numericInput(ns("p0_b"), "Proportion (DV = 1) in Control Group", value = 0.5, min = 0, max = 1),
-             numericInput(ns("p1_b"), "Proportion (DV = 1) in Treatment Group", value = 0.65, min = 0, max = 1),
-             sliderInput(ns("target_b"), "Power Target", value = 0.8, min = 0, max = 1),
-             numericInput(ns("maxn_b"), "Maximum Number of Subjects", value = 2000, min = 0, max = 10000000)
+             numericInput(ns("p0_b"), "Proportion (DV = 1) in control Ggoup", value = 0.5, min = 0, max = 1),
+             numericInput(ns("p1_b"), "Proportion (DV = 1) in treatment group", value = 0.65, min = 0, max = 1),
+             sliderInput(ns("target_b"), "Power target", value = 0.8, min = 0, max = 1),
+             numericInput(ns("maxn_b"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
            )
     ),
-    column(8,
-           wellPanel(
-             plotOutput(ns("powerplot"))
-           )
+    column(6,
+           plotOutput(ns("powerplot"))
     ),
-    column(12,
+    column(2,
            wellPanel(
              tags$h3(htmlOutput(ns("nrequired")))
            )
@@ -53,15 +51,15 @@ binaryPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
         ylim = c(0, 1),
         xlim = c(0, maxn),
         main = paste0(
-          "Power Analysis: Hypothetical Treatment Effect = ",
+          "Power analysis: hypothetical treatment effect = ",
           round((p1 - p0), 3),
-          " Percentage Points"
+          " Percentage points"
         ),
-        ylab = "Power (Probability of Statistical Significance)",
-        xlab = "Number of Subjects"
+        ylab = "Power (probability of statistical significance)",
+        xlab = "Number of subjects"
       )
-      lines(Ns_small, results$betas_small, lwd = 4, col = "blue")
-      abline(h = target, col = "red", lty = 2)
+      lines(Ns_small, results$betas_small, lwd = 4, col = "#2C88A2")
+      abline(h = target, col = "#850F19", lty = 2)
     }
     
     if(results$big){
@@ -70,15 +68,15 @@ binaryPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
         ylim = c(0, 1),
         xlim = c(0, maxn),
         main = paste0(
-          "Power Analysis: Hypothetical Treatment Effect = ",
+          "Power analysis: hypothetical treatment effect = ",
           round((p1 - p0), 3),
-          " Percentage Points"
+          " Percentage points"
         ),
-        ylab = "Power (Probability of Statistical Significance)",
-        xlab = "Number of Subjects"
+        ylab = "Power (probability of statistical significance)",
+        xlab = "Number of subjects"
       )
-      lines(Ns_big, results$betas_big, lwd = 4, col = "blue")
-      abline(h = target, col = "red", lty = 2)
+      lines(Ns_big, results$betas_big, lwd = 4, col = "#2C88A2")
+      abline(h = target, col = "#850F19", lty = 2)
     }
   })
   
