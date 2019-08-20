@@ -3,25 +3,25 @@ binaryClusPowerCalcUI <- function(id) {
   
   fluidRow(
     column(4,
-           wellPanel(
-             selectInput(ns("alpha_bc"), "Significance level",
-                         c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
-                         selected = 0.05),
-             numericInput(ns("p0_bc"), "Proportion (DV = 1) in control group", value = 0.5, min = 0, max = 1),
-             numericInput(ns("p1_bc"), "Proportion (DV = 1) in treatment group", value = 0.65, min = 0, max = 1),
-             sliderInput(ns("ICC_bc"), "Intra-cluster correlation", value = 0.5, min = 0, max = 1),
-             numericInput(ns("n_clus_per_arm_bc"), "Number of clusters per arm", value = 40, min = 0, max = 200),
-             sliderInput(ns("target_bc"), "Power target", value = 0.8, min = 0, max = 1),
-             numericInput(ns("maxn_bc"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
-           )
+      wellPanel(
+        selectInput(ns("alpha_bc"), "Significance level",
+                    c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
+                    selected = 0.05),
+        numericInput(ns("p0_bc"), "Proportion (DV = 1) in control group", value = 0.5, min = 0, max = 1),
+        numericInput(ns("p1_bc"), "Proportion (DV = 1) in treatment group", value = 0.65, min = 0, max = 1),
+        sliderInput(ns("ICC_bc"), "Intra-cluster correlation", value = 0.5, min = 0, max = 1),
+        numericInput(ns("n_clus_per_arm_bc"), "Number of clusters per arm", value = 40, min = 0, max = 200),
+        sliderInput(ns("target_bc"), "Power target", value = 0.8, min = 0, max = 1),
+        numericInput(ns("maxn_bc"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
+      )
     ),
     column(6,
-           plotOutput(ns("powerplot"))
+      plotOutput(ns("powerplot"))
     ),
     column(2,
-           wellPanel(
-             tags$h3(htmlOutput(ns("nrequired")))
-           )
+      wellPanel(
+        tags$h3(htmlOutput(ns("nrequired")))
+      )
     )
   )
 }

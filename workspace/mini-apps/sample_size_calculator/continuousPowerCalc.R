@@ -3,23 +3,23 @@ continuousPowerCalcUI <- function(id) {
   
   fluidRow(
     column(4,
-           wellPanel(
-             selectInput(ns("alpha"), "Significance level",
-                         c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1), 
-                         selected = 0.05),
-             numericInput(ns("tau"), "Treatment effect size", value = 5, min = 0, max = 40),
-             numericInput(ns("sigma"), "Standard deviation of outcome variable", value = 10, min = 0, max = 30),
-             sliderInput(ns("target"), "Power target", value = 0.8, min = 0, max = 1),
-             numericInput(ns("maxn"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
-           )
+      wellPanel(
+        selectInput(ns("alpha"), "Significance level",
+                    c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1), 
+                    selected = 0.05),
+        numericInput(ns("tau"), "Treatment effect size", value = 5, min = 0, max = 40),
+        numericInput(ns("sigma"), "Standard deviation of outcome variable", value = 10, min = 0, max = 30),
+        sliderInput(ns("target"), "Power target", value = 0.8, min = 0, max = 1),
+        numericInput(ns("maxn"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
+      )
     ),
     column(6,
-           plotOutput(ns("powerplot"))
+      plotOutput(ns("powerplot"))
     ),
     column(2,
-           wellPanel(
-             tags$h3(htmlOutput(ns("nrequired")))
-           )
+      wellPanel(
+        tags$h3(htmlOutput(ns("nrequired")))
+      )
     )
   )
 }

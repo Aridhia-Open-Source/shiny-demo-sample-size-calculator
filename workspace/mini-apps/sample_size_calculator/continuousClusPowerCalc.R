@@ -3,25 +3,25 @@ continuousClusPowerCalcUI <- function(id) {
   
   fluidRow(
     column(4,
-           wellPanel(
-             selectInput(ns("alpha_c"), "Significance level",
-                         c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
-                         selected = 0.05),
-             numericInput(ns("tau_c"), "Treatment effect size", value = 5, min = 0, max = 40),
-             numericInput(ns("sigma_c"), "Standard deviation of outcome variable", value = 10, min = 0, max = 30),
-             sliderInput(ns("ICC_c"), "Intra-cluster correlation", value = 0.5, min = 0, max = 1),
-             numericInput(ns("n_clus_per_arm_c"), "Number of clusters per arm", value = 40, min = 0, max = 200),
-             sliderInput(ns("target_c"), "Power target", value = 0.8, min = 0, max = 1),
-             numericInput(ns("maxn_c"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
-           )
+      wellPanel(
+        selectInput(ns("alpha_c"), "Significance level",
+                    c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
+                    selected = 0.05),
+        numericInput(ns("tau_c"), "Treatment effect size", value = 5, min = 0, max = 40),
+        numericInput(ns("sigma_c"), "Standard deviation of outcome variable", value = 10, min = 0, max = 30),
+        sliderInput(ns("ICC_c"), "Intra-cluster correlation", value = 0.5, min = 0, max = 1),
+        numericInput(ns("n_clus_per_arm_c"), "Number of clusters per arm", value = 40, min = 0, max = 200),
+        sliderInput(ns("target_c"), "Power target", value = 0.8, min = 0, max = 1),
+        numericInput(ns("maxn_c"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
+      )
     ),
     column(6,
-           plotOutput(ns("powerplot"))
+      plotOutput(ns("powerplot"))
     ),
     column(2,
-           wellPanel(
-             tags$h3(htmlOutput(ns("nrequired")))
-           )
+      wellPanel(
+        tags$h3(htmlOutput(ns("nrequired")))
+      )
     )
   )
 }
@@ -159,6 +159,5 @@ continuousClusPowerCalc <- function(input, output, session, Ns_small, Ns_big) {
     
     HTML(str1)
   })
-  
 }
 

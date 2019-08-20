@@ -3,23 +3,23 @@ binaryPowerCalcUI <- function(id) {
   
   fluidRow(
     column(4,
-           wellPanel(
-             selectInput(ns("alpha_b"), "Significance level",
-                         c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
-                         selected = 0.05),
-             numericInput(ns("p0_b"), "Proportion (DV = 1) in control Ggoup", value = 0.5, min = 0, max = 1),
-             numericInput(ns("p1_b"), "Proportion (DV = 1) in treatment group", value = 0.65, min = 0, max = 1),
-             sliderInput(ns("target_b"), "Power target", value = 0.8, min = 0, max = 1),
-             numericInput(ns("maxn_b"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
-           )
+      wellPanel(
+        selectInput(ns("alpha_b"), "Significance level",
+                    c("Alpha = 0.01" = 0.01, "Alpha = 0.05" = 0.05, "Alpha = 0.10" = 0.1),
+                    selected = 0.05),
+        numericInput(ns("p0_b"), "Proportion (DV = 1) in control Ggoup", value = 0.5, min = 0, max = 1),
+        numericInput(ns("p1_b"), "Proportion (DV = 1) in treatment group", value = 0.65, min = 0, max = 1),
+        sliderInput(ns("target_b"), "Power target", value = 0.8, min = 0, max = 1),
+        numericInput(ns("maxn_b"), "Maximum number of subjects", value = 2000, min = 0, max = 10000000)
+      )
     ),
     column(6,
-           plotOutput(ns("powerplot"))
+      plotOutput(ns("powerplot"))
     ),
     column(2,
-           wellPanel(
-             tags$h3(htmlOutput(ns("nrequired")))
-           )
+      wellPanel(
+        tags$h3(htmlOutput(ns("nrequired")))
+      )
     )
   )
 }
