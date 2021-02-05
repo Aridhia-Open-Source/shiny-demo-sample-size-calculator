@@ -3,25 +3,21 @@ documentation_tab <- function(){
          fluidPage(width = 12,
                    fluidRow(
                      column(6,
-                            h3("Calculating required study sample size"),
-                            p("This mini-app acts as a calculator, helping you understand the power of your
-                    experimental design to detect treatment effects. This will inform the sample 
-                    size you require to ensure your study is sufficiently powered."),
-                            h4("Mini-app layout"),
-                            p("The mini-app contains two tabs; this Help tab gives you an overview 
-                    of the mini-app itself. The Application tab allows you to select and run the 
-                    required study type."),
-                            h4("To use the mini-app"),
+                            h3("Calculating study sample size"),
+                            p("This mini-app acts as a sample size calculator, helping you understand the power of your
+                    experimental design to detect treatment effects. It will inform you abotu the required sample 
+                    size to ensure enough power in your study."),
+                            h4("How to use the mini-app"),
                             p("To experiment with how study type affects the required sample size, you can: "),
                             tags$ol(
-                              tags$li("Choose a ", strong("standard design "), 
-                                      "in which individuals are randomly assigned to treatment or control."),
                               tags$li("Choose a ", strong("clustered design"), "in which groups of individuals are assigned to treatment and control together."),
-                              tags$li("Opt for a ", strong("binary study design"), "with a binary outcome assessed between a control and treated group.")
+                              tags$li("Opt for a ", strong("binary study design"), "with a binary outcome assessed between a control and treated group."),
+                              tags$li("The default method is a", strong("standard design, "), 
+                                      "in which individuals are randomly assigned to treatment or control."),
                             ),
                             
                             p("Experiment with different values and how they affect the graphical output, to get a feel for how required sample size changes with 
-                    power, treatment effect, and standard deviation of the outcome. The required sample size is displayed on the right of the app.")
+                    power, treatment effect, and standard deviation of the outcome.")
                      ),
                      column(6,
                             h3("Walkthrough video"), 

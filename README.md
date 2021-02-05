@@ -1,13 +1,13 @@
 # Sample Size Calculator
 
-Using the whoel population for a study is not practical nor feasible, for this reason a 'sample' is selected from the population so we can make inferences about the population from the obtained results. The sample size, or number of participants, has to be defined before the start of a clinical study to avoid bias during the interpretation of the results. 
+Using whole populations for a study is not practical nor feasible. For this reason, when performing a clinical study, a 'sample' is selected from the population and, from the obtained results, we  make inferences about the population. The sample size, or number of participants, has to be defined before the start of a clinical study to avoid bias during the interpretation of the results. 
 
 - If we include very few subjects, the sample won't truly represent the population and it may not be possible to detect the difference between study groups.
 - If we include too many subjects, more individuals are exposed to the risk of the intervention and unnecessary resources will be wasted.
   
-Therefore, the correct calculation of the sample size is crucial in any clinical study. Aims to calculate the optiomum number of participants required to be able to achieve a scientifically valid reslt. It generally depends on the:
+Therefore, the correct calculation of the sample size is crucial in any clinical study. Aims to calculate the optimum number of participants required to be able to achieve a scientifically valid result. It generally depends on the:
 
-- Level of significace
+- Level of significance
 - Power of the study
 - Expected effect size
 - Event rate in the population
@@ -15,9 +15,9 @@ Therefore, the correct calculation of the sample size is crucial in any clinical
 
 ## About the Sample Size Calculator App
 
-This R Shiny mini-app aids you with study design by taking the results of your pilot study and showing the required number of participants per group to detect the observed difference between group with the desired power, as well as helping to adquire a deeper understanding of sample size calculations by interactive visualization.
+This R Shiny mini-app aids you with study design by taking the results of your pilot study and showing the required number of participants per group to detect the observed difference between group with the desired power, as well as helping to acquire a deeper understanding of sample size calculations by interactive visualization.
 
-Moreover, you can calculate sample sizes for clustered studies and studies with binary dependen variables.
+Moreover, you can calculate sample sizes for clustered studies and studies with binary dependent variables.
 
 ### Checkout and run
 
