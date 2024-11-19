@@ -24,7 +24,7 @@ Moreover, you can calculate sample sizes for clustered studies and studies with 
 You can clone this repository by using the command:
 
 ```{bash}
-git clone https://github.com/aridhia/demo-sample-size-calculator
+git clone https://github.com/Aridhia-Open-Source/shiny-demo-sample-size-calculator
 ```
 
 Open the .Rproj file in RStudio and use `runApp()` to run the app.
