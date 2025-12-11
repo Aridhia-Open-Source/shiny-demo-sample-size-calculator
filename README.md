@@ -15,7 +15,7 @@ Therefore, the correct calculation of the sample size is crucial in any clinical
 
 ## About the Sample Size Calculator App
 
-This R Shiny mini-app aids you with study design by taking the results of your pilot study and showing the required number of participants per group to detect the observed difference between group with the desired power, as well as helping to acquire a deeper understanding of sample size calculations by interactive visualization.
+This R web app aids you with study design by taking the results of your pilot study and showing the required number of participants per group to detect the observed difference between group with the desired power, as well as helping to acquire a deeper understanding of sample size calculations by interactive visualization.
 
 Moreover, you can calculate sample sizes for clustered studies and studies with binary dependent variables.
 
@@ -32,7 +32,7 @@ Open the .Rproj file in RStudio and use `runApp()` to run the app.
 ### Deploying to the workspace
 
 1. Download this GitHub repo as a .zip file.
-2. Create a new blank Shiny app in your workspace called "sample-size-calculator".
+2. Create a new blank R web app in your workspace called "sample-size-calculator".
 3. Navigate to the `sample-size-calculator` folder under "files".
 4. Delete the `app.R` file from the `sample-size-calculator` folder. Make sure you keep the `.version` file!
 5. Upload the .zip file to the `sample-size-calculator` folder.
